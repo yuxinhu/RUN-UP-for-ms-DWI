@@ -15,7 +15,7 @@ There are mainly three parts of code:
 (3) Post-processing the data: including reorganization and evaluation of the results.
 
 ### Usage
-All data are saved on our group server, please refer to [this sheet]. We have also uploaded a trained network. It is trained with the following command:
+All data are saved on our group server, please refer to [this sheet](). We have also uploaded a trained network. It is trained with the following command:
 
 The fine-tuning command:
 
