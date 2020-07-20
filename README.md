@@ -15,13 +15,30 @@ There are mainly three parts of code:
 (3) Post-processing the data: including reorganization and evaluation of the results (demo_DL_save_com_res.m). This part should be pretty straightforward.
 
 ### Usage
-All data are saved on our group server, please refer to [this sheet](). We have also uploaded a trained network. It is trained with the following command:
+All data are saved on our group server, please refer to [this sheet](). One trained network is saved on our group server /bmrNAS/people/yuxinh/DL_data_revision/model_saved/nonc_iter6_ki_32filter_interloss/. It is trained with the following command (you probably need to set the paths yourselves):
+
+    python run_up.py --mode="train" --input_dir=“TRAIN_DATA_PATH” --output_dir=“OUTPUT_PATH” --net="unet" --num_filters=32 --num_steps=2 --num_unroll_iter=6 --batch_size=3 --unroll_opt="fista" --no_do_hardproj  --do_residual_conv --stride_y=4 --lr=0.0004 --intermediate_loss --addb0=1 --lrelu=0
 
 The fine-tuning command:
+    python run_up.py --mode="train" --input_dir=“TRAIN_DATA_PATH” --output_dir=“OUTPUT_PATH” --checkpoint=“TRAINED_NETWORK_PATH” --net="unet" --num_filters=32 --num_steps=2 --num_unroll_iter=6 --batch_size=3 --unroll_opt="fista" --no_do_hardproj  --do_residual_conv --stride_y=4 --lr=0.0004 --intermediate_loss --addb0=1 --lrelu=0
 
 The test command:
+    python run_up.py --mode=“test” --input_dir=“TEST_DATA_PATH” --output_dir=“OUTPUT_PATH”  --checkpoint=“TRAINED_NETWORK_PATH” --net="unet" --num_filters=32 --num_steps=2 --num_unroll_iter=6 --batch_size=3 --unroll_opt="fista" --no_do_hardproj  --do_residual_conv --stride_y=4 --lr=0.0004 --intermediate_loss --addb0=1 --lrelu=0
 
-For visualization using Tensorboard:
+Some notes about visualization using Tensorboard which may be super helpful:
+
+  You can port-forward with another ssh command that need not be tied to how you are connecting to the server (as an alternative to the other answer). Thus, the ordering of the below steps is arbitrary.
+    1. from your local machine, run
+      ssh -N -f -L localhost:16006:localhost:6006 yuxinh@roma
+    2. on the remote machine, run tensorboard --logdir <path>
+    (-N : no remote commands
+     -f : put ssh in the background 
+     -L <machine1>:<portA>:<machine2>:<portB> : forward <machine2>:<portB> (remote scope) to <machine1>:<portA> (local scope)
+  
+  Then from you local machine, try http://127.0.0.1:16006 and then you should be able to check the real-time results.
+
+
+
 
 
 
