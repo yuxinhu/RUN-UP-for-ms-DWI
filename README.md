@@ -39,7 +39,7 @@ Some notes about visualization using Tensorboard which may be super helpful:
                  -f : put ssh in the background 
                  -L <machine1>:<portA>:<machine2>:<portB> : forward <machine2>:<portB> (remote scope) to <machine1>:<portA> (local scope)
   
-     Then from you local machine, try http://127.0.0.1:16006 and then you should be able to check the real-time results.
+     Then from you local machine, go to http://127.0.0.1:16006 and then you should be able to check the real-time results.
 
 
 
